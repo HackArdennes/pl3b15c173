@@ -1,0 +1,12 @@
+{
+  "name": "pl3b15c173",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/HackArdennes/pl3b15c173",
+  "author": "Sébastien Cas",
+  "license": "MIT",
+  "dependencies": {
+    "mongoose": "^4.11.5",
+    "restify": "^5.0.1"
+  }
+}
