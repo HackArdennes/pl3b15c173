@@ -1,0 +1,5 @@
+{
+    api-server-name: 'pl3b15c173-api-server',
+    mongo-uri: 'mongodb://localhost/pl3b15c173',
+    'port': 8000
+}
