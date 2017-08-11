@@ -1,5 +1,6 @@
 {
     "api_server_name": "pl3b15c173-api-server",
     "api_server_port": 8080,
-    "mongo_uri": "mongodb://localhost/pl3b15c173"
+    "mongo_uri": "mongodb://localhost/pl3b15c173",
+    "mongo_test_uri": "mongodb://localhost/pl3b15c173"
 }

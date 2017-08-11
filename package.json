@@ -10,6 +10,7 @@
     "drakov": "^1.0.4",
     "dredd": "^4.2.0",
     "mongoose": "^4.11.5",
+    "pow-mongodb-fixtures": "^0.14.0",
     "restify": "^5.0.1"
   }
 }
