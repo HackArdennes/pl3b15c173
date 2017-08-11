@@ -7,6 +7,7 @@
   "license": "MIT",
   "dependencies": {
     "mongoose": "^4.11.5",
+    "pow-mongodb-fixtures": "^0.14.0",
     "restify": "^5.0.1"
   }
 }
