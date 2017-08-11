@@ -1,0 +1,88 @@
+FORMAT: 1A
+# pl3b15c173
+pl3b15c173 is a vote platform.
+
+# Data Structures
+
+## Candidate (object)
+
++ id: 1 (number, required)
++ name: Candidate #1 (required)
++ description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus sequi asperiores voluptate inventore culpa dolores nostrum consequuntur autem. Perspiciatis dolor nisi alias dolore autem! A sequi consequuntur eveniet sapiente accusamus.
+
+# Group Candidates
+
+## Candidates collection [/candidates]
+
+### List all Candidates [GET]
+
++ Response 200 (application/json)
+
+    + Attributes (array[Candidate])
+
+## Votes [/candidates/{candidate_id}/votes]
+
+### Vote for a Candidate [POST]
+
++ Parameters
+    + candidate_id: 1 (number) - ID of the Candidate
+
++ Request (application/json)
+
+    + Body
+
+            {
+              "voter": "nicolas.charlot@isics.fr"
+            }
+
+    + Schema
+
+            {
+              "$schema": "http://json-schema.org/draft-04/schema#",
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string"
+                }
+              }
+            }
+
++ Response 201 (application/json)
+
+          {
+            "id": 1
+          }
+
+
+## Vote [/candidates/{candidate_id}/votes/{vote_id}]
+
+### Confirm a vote [PUT]
+
++ Parameters
+    + candidate_id: 1 (number) - ID of the Candidate
+    + vote_id: 1 (number) - ID of the vote
+
++ Request (application/json)
+
+    + Body
+
+            {
+              "token": "D1BIp0XUuMMHHrYqogIL5CafBc0VP9BtX1w00r4uroqUgTvRPrgmHOgDKDWXpLC4"
+            }
+
+    + Schema
+
+            {
+              "$schema": "http://json-schema.org/draft-04/schema#",
+              "type": "object",
+              "properties": {
+                "token": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "token"
+              ]
+            }
+
++ Response 200

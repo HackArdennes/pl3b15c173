@@ -6,6 +6,9 @@
   "author": "Sébastien Cas",
   "license": "MIT",
   "dependencies": {
+    "aglio": "^2.3.0",
+    "drakov": "^1.0.4",
+    "dredd": "^4.2.0",
     "mongoose": "^4.11.5",
     "restify": "^5.0.1"
   }
