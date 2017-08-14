@@ -1,5 +1,6 @@
 function VoteController() {
     this.create = function(req, res, next) {
+        var server = this;
         var voteModel = require('../models/vote');
         var vote = new voteModel({ email: req.params['email'], candidateId: req.params['candidate_id'] });
         vote.save(function(err) {
@@ -8,13 +9,15 @@ function VoteController() {
 
                 return res.send(err);
             } else {
+                var url = server.url+server.router.render('vote_confirm', { candidate_id: vote.candidateId, vote_id: vote._id })
+
                 const emailConfig = require('../config').emails;
                 var email = {
                     from: emailConfig['default_sender'],
                     to: vote.email,
                     subject: emailConfig['vote_confirmation']['subject'],
-                    text: emailConfig['vote_confirmation']['text_body'],
-                    html: emailConfig['vote_confirmation']['html_body']
+                    text: emailConfig['vote_confirmation']['text_body'].replace('%link%', url),
+                    html: emailConfig['vote_confirmation']['html_body'].replace('%link%', url)
                 };
 
                 require('../mailer').sendMail(email, function(err, info) {
