@@ -1,15 +1,28 @@
 function VoteController() {
     this.create = function(req, res, next) {
-        var email = req.params['email'];
-
         var voteModel = require('../models/vote');
-        var vote = new voteModel({ email: email, candidateId: req.params['candidate_id'] });
+        var vote = new voteModel({ email: req.params['email'], candidateId: req.params['candidate_id'] });
         vote.save(function(err) {
             if(err) {
                 console.log('CREATE VOTE ERROR: '+err);
 
                 return res.send(err);
             } else {
+                const emailConfig = require('../config').emails;
+                var email = {
+                    from: emailConfig['default_sender'],
+                    to: vote.email,
+                    subject: emailConfig['vote_confirmation']['subject'],
+                    text: emailConfig['vote_confirmation']['text_body'],
+                    html: emailConfig['vote_confirmation']['html_body']
+                };
+
+                require('../mailer').sendMail(email, function(err, info) {
+                    if (err) {
+                        return console.log('SEND VOTE CONFIRMATION EMAIL ERROR:'+err);
+                    }
+                });
+
                 console.log('CREATE VOTE SUCCESS: '+vote);
 
                 return res.send({ id: vote._id });

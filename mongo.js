@@ -18,4 +18,4 @@ connectionPromise
         process.exit(1);
     });
 
-exports.mongoose = mongoose;
+module.exports.mongoose = mongoose;
