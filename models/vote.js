@@ -11,6 +11,10 @@ var voteSchema = new mongoose.Schema({
 var voteModel = mongoose.model('votes', voteSchema);
 
 voteSchema.path('email').validate(function() {
+    if (!this.isNew) {
+        return true;
+    }
+
     var vote = this;
     return new Promise(function(resolve) {
         voteModel.count({ email: vote.email, candidateId: vote.candidateId }, function(err, count) {
@@ -18,7 +22,7 @@ voteSchema.path('email').validate(function() {
                 console.error('Vote email validation error: '+err);
             }
 
-            resolve(count == 0);
+            return resolve(count == 0);
         });
     });
 
@@ -33,7 +37,7 @@ voteSchema.path('candidateId').validate(function(value) {
                 return resolve(false);
             }
 
-            resolve(count == 1);
+            return resolve(count == 1);
         });
     });
 
