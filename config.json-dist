@@ -16,6 +16,7 @@
     },
     "default_sender_email": "no_reply@pl3b15c173"
   },
+  "domain_blacklist": [ "yopmail" ],
   "emails": {
     "vote_confirmation": {
       "subject": "Confirmez votre vote !",
