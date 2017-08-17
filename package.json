@@ -9,6 +9,7 @@
     "aglio": "^2.3.0",
     "drakov": "^1.0.4",
     "dredd": "^4.2.0",
+    "isemail": "^3.0.0",
     "mongoose": "^4.11.5",
     "nodemailer": "^4.0.1",
     "pow-mongodb-fixtures": "^0.14.0",

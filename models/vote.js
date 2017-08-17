@@ -28,6 +28,18 @@ voteSchema.path('email').validate(function() {
 
 }, 'Vote already exists');
 
+voteSchema.path('email').validate(function(value) {
+    return new Promise(function(resolve) {
+        const config = require('../config');
+        var isemail = require('isemail');
+
+        resolve(isemail.validate(value, config['emails']['validator_options'], function(result) {
+            console.log(result);
+        }));
+    });
+
+}, 'Email address is invalid');
+
 voteSchema.path('candidateId').validate(function(value) {
     return new Promise(function(resolve) {
         require('./candidate').count({ _id: mongoose.Types.ObjectId(value) }, function(err, count) {
