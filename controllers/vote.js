@@ -11,13 +11,13 @@ function VoteController() {
             } else {
                 var url = server.url+server.router.render('vote_confirm', { candidate_id: vote.candidateId, vote_id: vote._id })
 
-                const emailConfig = require('../config').emails;
+                const config = require('../config');
                 var email = {
-                    from: emailConfig['default_sender'],
+                    from: config['mailer']['default_sender_email'],
                     to: vote.email,
-                    subject: emailConfig['vote_confirmation']['subject'],
-                    text: emailConfig['vote_confirmation']['text_body'].replace('%link%', url),
-                    html: emailConfig['vote_confirmation']['html_body'].replace('%link%', url)
+                    subject: config['emails']['vote_confirmation']['subject'],
+                    text: config['emails']['vote_confirmation']['text_body'].replace('%link%', url),
+                    html: config['emails']['vote_confirmation']['html_body'].replace('%link%', url)
                 };
 
                 require('../mailer').sendMail(email, function(err, info) {
