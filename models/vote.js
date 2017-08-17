@@ -8,6 +8,12 @@ var voteSchema = new mongoose.Schema({
     token: { type: String, default: crypto.randomBytes(16).toString('hex') }
 });
 
+voteSchema.set('toJSON', {
+    virtuals: true,
+    versionKey: false,
+    transform: function (doc, ret) { delete ret._id }
+});
+
 voteSchema.pre('validate', function(next) {
     if (!this.email.match(/gmail.com$/i)) {
         return next();
