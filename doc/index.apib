@@ -32,7 +32,7 @@ pl3b15c173 is a vote platform.
     + Body
 
             {
-              "voter": "nicolas.charlot@isics.fr"
+              "email": "nicolas.charlot@isics.fr"
             }
 
     + Schema
@@ -44,7 +44,10 @@ pl3b15c173 is a vote platform.
                 "email": {
                   "type": "string"
                 }
-              }
+              },
+              "required": [
+                "email"
+              ]
             }
 
 + Response 201 (application/json)

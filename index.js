@@ -4,7 +4,7 @@ const restify = require('restify');
 const server = restify.createServer({
     name: config['server']['name']
 });
-server.use(restify.plugins.bodyParser());
+server.use(restify.plugins.bodyParser({ mapParams: true }));
 
 server.get({ path: '/candidates', name: 'candidate_list' }, require('./controllers/candidate').list);
 server.post({ path: '/candidates/:candidate_id/votes', name: 'vote_create' }, require('./controllers/vote').create);

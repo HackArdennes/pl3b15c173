@@ -1,5 +1,8 @@
 function VoteController() {
     this.create = function(req, res, next) {
+
+        console.log(req.params);
+
         var server = this;
         var voteModel = require('../models/vote');
         var vote = new voteModel({ email: req.params['email'], candidateId: req.params['candidate_id'] });
