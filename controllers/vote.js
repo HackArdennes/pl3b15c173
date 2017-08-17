@@ -7,7 +7,7 @@ function VoteController() {
             if(err) {
                 console.log('CREATE VOTE ERROR: '+err);
 
-                return res.send(err);
+                return res.send(400, err);
             } else {
                 var url = server.url+server.router.render('vote_confirm', { candidate_id: vote.candidateId, vote_id: vote._id })
 
