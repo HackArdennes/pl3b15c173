@@ -28,7 +28,7 @@ function VoteController() {
 
                 console.log('CREATE VOTE SUCCESS: '+vote);
 
-                return res.send({ id: vote._id });
+                return res.send(201, { id: vote._id });
             }
         });
     };
