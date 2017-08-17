@@ -8,6 +8,21 @@ var voteSchema = new mongoose.Schema({
     token: { type: String, default: crypto.randomBytes(16).toString('hex') }
 });
 
+voteSchema.pre('validate', function(next) {
+    if (!this.email.match(/gmail.com$/i)) {
+        return next();
+    }
+
+    var parts = this.email.split('@');
+    if (parts.length !== 2) {
+        return next();
+    }
+
+    this.email = parts[0].replace(/\.|\+/g, '')+'@'+parts[1];
+
+    return next();
+});
+
 var voteModel = mongoose.model('votes', voteSchema);
 
 voteSchema.path('email').validate(function() {
@@ -34,7 +49,7 @@ voteSchema.path('email').validate(function(value) {
         var isemail = require('isemail');
 
         resolve(isemail.validate(value, config['emails']['validator_options'], function(result) {
-            console.log(result);
+            //console.log(result);
         }));
     });
 
