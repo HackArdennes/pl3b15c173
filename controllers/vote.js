@@ -50,20 +50,20 @@ function VoteController() {
                 if (null === vote) {
                     console.log('CONFIRM VOTE ERROR '+msgParams+': vote does not exist');
 
-                    return res.send(400, { error: 'Vote does not exists' });
+                    return res.send(400, { name: 'ConfirmationError', message: 'Vote does not exists' });
                 }
 
                 var token = req.params['token'];
                 if (token !== vote.token) {
                     console.log('CONFIRM VOTE ERROR '+msgParams+': invalid token "'+token+'"');
 
-                    return res.send(400, { error: 'Invalid token' });
+                    return res.send(400, { name: 'ConfirmationError', message: 'Invalid token' });
                 }
 
                 if (vote.isConfirmed == true) {
                     console.log('CONFIRM VOTE ERROR '+msgParams+': already confirmed');
 
-                    return res.send(400, { error: 'already confirmed' });
+                    return res.send(400, { name: 'ConfirmationError', message: 'Vote already confirmed' });
                 }
 
                 vote.isConfirmed = true;
@@ -71,7 +71,7 @@ function VoteController() {
                     if(err) {
                         console.log('CONFIRM VOTE ERROR: '+err);
 
-                        return res.send(err);
+                        return res.send(400, err);
                     } else {
                         console.log('CONFIRM VOTE SUCCESS: '+vote);
 
