@@ -3,6 +3,7 @@ const mongoose = require('../mongo').mongoose;
 
 var voteSchema = new mongoose.Schema({
     email: { type: String, required: true },
+    canonicalEmail: { type: String, required: true },
     candidateId: { type: String, required: true },
     isConfirmed: { type: Boolean, required: 0, default: 0 },
     token: { type: String, default: crypto.randomBytes(16).toString('hex') }
@@ -15,6 +16,7 @@ voteSchema.set('toJSON', {
 });
 
 voteSchema.pre('validate', function(next) {
+    this.canonicalEmail = this.email;
     if (!this.email.match(/gmail.com$/i)) {
         return next();
     }
@@ -24,7 +26,7 @@ voteSchema.pre('validate', function(next) {
         return next();
     }
 
-    this.email = parts[0].replace(/\.|\+/g, '')+'@'+parts[1];
+    this.canonicalEmail = parts[0].replace(/\.|\+.*/g, '')+'@'+parts[1];
 
     return next();
 });
@@ -38,7 +40,7 @@ voteSchema.path('email').validate(function() {
 
     var vote = this;
     return new Promise(function(resolve) {
-        voteModel.count({ email: vote.email, candidateId: vote.candidateId }, function(err, count) {
+        voteModel.count({ canonicalEmail: vote.canonicalEmail, candidateId: vote.candidateId }, function(err, count) {
             if (err) {
                 console.error('Vote email validation error: '+err);
             }
