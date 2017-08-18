@@ -59,9 +59,15 @@ pl3b15c173 is a vote platform.
 + Response 400 (application/json)
 
           {
-            "name": "ValidationError"
-            "message": "Validation error message"
-            "errors": {}
+            "name": "ValidationError",
+            "message": "Validation error message",
+            "errors": {
+              "fieldName": {
+                "name": "Validation error name",
+                "message": "Validation error message",
+                "value": "Field value"
+              }
+            }
           }
 
 
@@ -101,28 +107,34 @@ pl3b15c173 is a vote platform.
 + Response 400 (application/json)
 
           {
-            "name": "ConfirmationError"
+            "name": "ConfirmationError",
             "message": "Vote does not exists"
           }
 
 + Response 400 (application/json)
 
           {
-            "name": "ConfirmationError"
+            "name": "ConfirmationError",
             "message": "Invalid token"
           }
 
 + Response 400 (application/json)
 
           {
-            "name": "ConfirmationError"
+            "name": "ConfirmationError",
             "message": "Vote already confirmed"
           }
 
 + Response 400 (application/json)
 
           {
-            "name": "ValidationError"
-            "message": "Validation error message"
-            "errors": {}
+            "name": "ValidationError",
+            "message": "Validation error message",
+            "errors": {
+              "fieldName": {
+                "name": "Validation error name",
+                "message": "Validation error message",
+                "value": "Field value"
+              }
+            }
           }
