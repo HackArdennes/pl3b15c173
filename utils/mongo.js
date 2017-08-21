@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const config = require('./config');
+const config = require('../config');
 
 // Set promise to native ES6 promise
 mongoose.Promise = global.Promise;

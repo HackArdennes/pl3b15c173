@@ -1,4 +1,4 @@
-const mongoose = require('../mongo').mongoose;
+const mongoose = require('../utils/mongo').mongoose;
 
 var candidateSchema = new mongoose.Schema({
     name: { type: String, required: true },

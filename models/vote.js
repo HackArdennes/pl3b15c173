@@ -1,5 +1,5 @@
 const crypto = require('crypto');
-const mongoose = require('../mongo').mongoose;
+const mongoose = require('../utils/mongo').mongoose;
 
 var voteSchema = new mongoose.Schema({
     email: { type: String, required: true },
