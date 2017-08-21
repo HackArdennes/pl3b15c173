@@ -10,15 +10,26 @@ pl3b15c173 is a vote platform.
 + name: Candidate #1 (required)
 + description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus sequi asperiores voluptate inventore culpa dolores nostrum consequuntur autem. Perspiciatis dolor nisi alias dolore autem! A sequi consequuntur eveniet sapiente accusamus.
 
+## Result (object)
+
++ id: 1 (number, required)
++ name: Candidate #1 (required)
++ description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus sequi asperiores voluptate inventore culpa dolores nostrum consequuntur autem. Perspiciatis dolor nisi alias dolore autem! A sequi consequuntur eveniet sapiente accusamus.
++ nbVotes: 2 (number)
++ nbConfirmedVotes: 1 (number)
++ score: 11 (number)
+
 # Group Candidates
 
-## Candidates collection [/candidates]
+## Candidates [/candidates]
 
 ### List all Candidates [GET]
 
 + Response 200 (application/json)
 
     + Attributes (array[Candidate])
+
+
 
 ## Votes [/candidates/{candidate_id}/votes]
 
@@ -56,19 +67,25 @@ pl3b15c173 is a vote platform.
             "id": 1
           }
 
++ Response 404 (application/json)
+
+          {
+            "error": "Candidate not found"
+          }
+
 + Response 400 (application/json)
 
           {
-            "name": "ValidationError",
-            "message": "Validation error message",
-            "errors": {
-              "fieldName": {
-                "name": "Validation error name",
-                "message": "Validation error message",
-                "value": "Field value"
-              }
-            }
+            "error": "Vote already exists"
           }
+
++ Response 400 (application/json)
+
+          {
+            "name": "Invalid vote",
+            "detail": {}
+          }
+
 
 
 ## Vote [/candidates/{candidate_id}/votes/{vote_id}]
@@ -104,37 +121,38 @@ pl3b15c173 is a vote platform.
 
 + Response 200
 
-+ Response 400 (application/json)
++ Response 404 (application/json)
 
           {
-            "name": "ConfirmationError",
-            "message": "Vote does not exists"
+            "error": "Candidate not found"
+          }
+
++ Response 404 (application/json)
+
+          {
+            "error": "Vote not found"
           }
 
 + Response 400 (application/json)
 
           {
-            "name": "ConfirmationError",
-            "message": "Invalid token"
+            "error": "Vote already confirmed"
           }
 
 + Response 400 (application/json)
 
           {
-            "name": "ConfirmationError",
-            "message": "Vote already confirmed"
+            "error": "Invalid token"
           }
 
-+ Response 400 (application/json)
 
-          {
-            "name": "ValidationError",
-            "message": "Validation error message",
-            "errors": {
-              "fieldName": {
-                "name": "Validation error name",
-                "message": "Validation error message",
-                "value": "Field value"
-              }
-            }
-          }
+
+# Group Result
+
+## Result [/result]
+
+### Get result [GET]
+
++ Response 200 (application/json)
+
+    + Attributes (array[Result])
