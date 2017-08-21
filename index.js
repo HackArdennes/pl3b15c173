@@ -6,9 +6,12 @@ const server = restify.createServer({
 });
 server.use(restify.plugins.bodyParser({ mapParams: true }));
 
-server.get({ path: '/candidates', name: 'candidate_list' }, require('./controllers/candidate').list);
-server.post({ path: '/candidates/:candidate_id/votes', name: 'vote_create' }, require('./controllers/vote').create);
-server.put({ path: '/candidates/:candidate_id/votes/:vote_id', name: 'vote_confirm' }, require('./controllers/vote').confirm);
+var candidateController = require('./controllers/candidate');
+
+server.get({ path: '/candidates', name: 'candidate_list' }, candidateController.list);
+server.post({ path: '/candidates/:candidate_id/votes', name: 'candidate_add_vote' }, candidateController.addVote);
+server.put({ path: '/candidates/:candidate_id/votes/:vote_id', name: 'candidate_confirm_vote' }, candidateController.confirmVote);
+server.get({ path: '/result', name: 'get' }, require('./controllers/result').get);
 
 server.listen(config['server']['port'], function() {
     console.log('pl3b15c173 API server listening on port number', config['server']['port']);
