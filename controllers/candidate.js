@@ -67,7 +67,7 @@ function CandidateController() {
                         html: config['emails']['vote_confirmation']['html_body'].replace('%link%', url)
                     };
 
-                    require('../mailer').sendMail(email, function(err, info) {
+                    require('../utils/mailer').sendMail(email, function(err, info) {
                         if (err) {
                             return console.log('ERROR: unable to send confirmation email: '+err);
                         }
