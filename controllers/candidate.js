@@ -127,7 +127,7 @@ function CandidateController() {
                 if (err) {
                     console.log('ERROR: unable to confirm vote: '+err);
 
-                    return res.send(500, err);
+                    return res.send(500);
                 }
 
                 console.log('Vote '+voteId+' confirmed');
