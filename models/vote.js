@@ -4,8 +4,16 @@ const mongoose = require('../mongo').mongoose;
 var voteSchema = new mongoose.Schema({
     email: { type: String, required: true },
     canonicalEmail: { type: String, required: true },
-    isConfirmed: { type: Boolean, required: 0, default: 0 },
-    token: { type: String, default: crypto.randomBytes(16).toString('hex') }
+    isConfirmed: { type: Boolean, required: true, default: false },
+    token: { type: String }
+});
+
+voteSchema.pre('save', function (next) {
+    if (this.isNew) {
+        this.token = crypto.randomBytes(16).toString('hex');
+    }
+
+    next();
 });
 
 voteSchema.set('toJSON', {
