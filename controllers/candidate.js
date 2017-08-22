@@ -44,7 +44,11 @@ function CandidateController() {
 
                 // Save vote
                 var voteModel = require('../models/vote');
-                var vote = new voteModel({ email: req.params['email'], canonicalEmail: canonicalEmail });
+                var vote = new voteModel({
+                    email: req.params['email'],
+                    canonicalEmail: canonicalEmail,
+                    token: require('crypto').randomBytes(16).toString('hex')
+                });
                 candidate.votes.push(vote);
                 candidate.save(function (err) {
                     if (err) {

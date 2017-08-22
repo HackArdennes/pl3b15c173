@@ -1,4 +1,3 @@
-const crypto = require('crypto');
 const mongoose = require('../utils/mongo').mongoose;
 
 var voteSchema = new mongoose.Schema({
@@ -6,14 +5,6 @@ var voteSchema = new mongoose.Schema({
     canonicalEmail: { type: String, required: true },
     isConfirmed: { type: Boolean, required: true, default: false },
     token: { type: String }
-});
-
-voteSchema.pre('save', function (next) {
-    if (this.isNew) {
-        this.token = crypto.randomBytes(16).toString('hex');
-    }
-
-    next();
 });
 
 voteSchema.set('toJSON', {
