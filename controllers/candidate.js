@@ -8,8 +8,6 @@ function CandidateController() {
     };
 
     this.addVote = function(req, res, next) {
-        var server = this;
-
         // Retrieve params
         var candidateId = req.params['candidate_id'];
         var email = req.params['email'];
@@ -56,9 +54,14 @@ function CandidateController() {
                     }
 
                     // Send confirmation email
-                    var url = server.url+server.router.render('candidate_confirm_vote', { candidate_id: vote.candidateId, vote_id: vote._id })
-
                     const config = require('../config');
+
+                    var url = config['emails']['vote_confirmation']['confirm_url']
+                        .replace('%candidate_id%', candidate._id)
+                        .replace('%vote_id%', vote._id)
+                        .replace('%token%', vote.token)
+                    ;
+
                     var email = {
                         from: config['mailer']['default_sender_email'],
                         to: vote.email,

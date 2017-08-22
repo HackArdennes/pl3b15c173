@@ -21,7 +21,8 @@
     "vote_confirmation": {
       "subject": "Confirmez votre vote !",
       "text_body": "Pour confirmer votre vote, copiez / collez le lien suivant dans la barre d'adresse de votre navigateur : %link%",
-      "html_body": "<p>Veuillez confirmer votre vote en cliquant <a href=\"%link%\">ici</a>."
+      "html_body": "<p>Veuillez confirmer votre vote en cliquant <a href=\"%link%\">ici</a>.",
+      "confirm_url": "http://monapi/candidates/%candidate_id%/votes/%vote_id%/token/%token%"
     }
   }
 }
