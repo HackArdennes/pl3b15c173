@@ -13,6 +13,10 @@ function CandidateController() {
         var email = req.params['email'];
 
         // Check candidate resource
+        if (!require('../utils/mongo').mongoose.Types.ObjectId.isValid(candidateId)) {
+            return res.send(404, { error: 'Candidate not found' });
+        }
+
         var candidateModel = require('../models/candidate');
         candidateModel.findOne({ '_id': candidateId }, function(err, candidate) {
             if (err) {
@@ -94,6 +98,10 @@ function CandidateController() {
         var token = req.params['token'];
 
         // Check candidate and vote
+        if (!require('../utils/mongo').mongoose.Types.ObjectId.isValid(candidateId)) {
+            return res.send(404, { error: 'Candidate not found' });
+        }
+
         var candidateModel = require('../models/candidate');
         candidateModel.findOne({ '_id': candidateId }, function(err, candidate) {
             if (err) {
