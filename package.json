@@ -13,6 +13,7 @@
     "mongoose": "^4.11.5",
     "nodemailer": "^4.0.1",
     "pow-mongodb-fixtures": "^0.14.0",
-    "restify": "^5.0.1"
+    "restify": "^5.0.1",
+    "restify-cors-middleware": "^1.0.1"
   }
 }

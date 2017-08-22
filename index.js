@@ -6,6 +6,15 @@ const server = restify.createServer({
 });
 server.use(restify.plugins.bodyParser({ mapParams: true }));
 
+// CORS
+const corsMiddleware = require('restify-cors-middleware')
+const cors = corsMiddleware({
+    origins: ['*']
+});
+server.pre(cors.preflight);
+server.use(cors.actual);
+
+// Routing
 var candidateController = require('./controllers/candidate');
 
 server.get({ path: '/candidates', name: 'candidate_list' }, candidateController.list);
@@ -13,6 +22,7 @@ server.post({ path: '/candidates/:candidate_id/votes', name: 'candidate_add_vote
 server.put({ path: '/candidates/:candidate_id/votes/:vote_id', name: 'candidate_confirm_vote' }, candidateController.confirmVote);
 server.get({ path: '/result', name: 'get' }, require('./controllers/result').get);
 
+// Start server
 server.listen(config['server']['port'], function() {
     console.log('pl3b15c173 API server listening on port number', config['server']['port']);
 });
