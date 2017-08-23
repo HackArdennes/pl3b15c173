@@ -70,12 +70,22 @@ function CandidateController() {
                         .replace('%token%', vote.token)
                     ;
 
+                    var emailText = config['emails']['vote_confirmation']['text_body'];
+                    if (Array.isArray(emailText)) {
+                        emailText = emailText.join('\n');
+                    }
+
+                    var emailBody = config['emails']['vote_confirmation']['html_body'];
+                    if (Array.isArray(emailBody)) {
+                        emailBody = emailBody.join('\n');
+                    }
+
                     var email = {
                         from: config['mailer']['default_sender_email'],
                         to: vote.email,
                         subject: config['emails']['vote_confirmation']['subject'],
-                        text: config['emails']['vote_confirmation']['text_body'].replace('%link%', url),
-                        html: config['emails']['vote_confirmation']['html_body'].replace('%link%', url)
+                        text: emailText.replace('%link%', url).replace('%candidate%', candidate.name),
+                        html: emailBody.replace('%link%', url).replace('%candidate%', candidate.name)
                     };
 
                     require('../utils/mailer').sendMail(email, function(err, info) {
